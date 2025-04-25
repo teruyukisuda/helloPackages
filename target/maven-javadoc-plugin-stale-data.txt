@@ -1,0 +1,68 @@
+-J-Duser.language=
+-J-Duser.country=
+@options
+@packages
+-classpath
+'/Users/tsuda/.m2/repository/org/slf4j/slf4j-api/1.7.36/slf4j-api-1.7.36.jar:/Users/tsuda/.m2/repository/ch/qos/logback/logback-classic/1.5.18/logback-classic-1.5.18.jar:/Users/tsuda/.m2/repository/ch/qos/logback/logback-core/1.5.18/logback-core-1.5.18.jar:/Users/tsuda/.m2/repository/org/springframework/boot/spring-boot/3.4.4/spring-boot-3.4.4.jar:/Users/tsuda/.m2/repository/org/springframework/spring-core/6.2.5/spring-core-6.2.5.jar:/Users/tsuda/.m2/repository/org/springframework/spring-jcl/6.2.5/spring-jcl-6.2.5.jar:/Users/tsuda/.m2/repository/org/springframework/spring-context/6.2.5/spring-context-6.2.5.jar:/Users/tsuda/.m2/repository/org/springframework/spring-aop/6.2.5/spring-aop-6.2.5.jar:/Users/tsuda/.m2/repository/org/springframework/spring-beans/6.2.5/spring-beans-6.2.5.jar:/Users/tsuda/.m2/repository/org/springframework/spring-expression/6.2.5/spring-expression-6.2.5.jar:/Users/tsuda/.m2/repository/io/micrometer/micrometer-observation/1.14.5/micrometer-observation-1.14.5.jar:/Users/tsuda/.m2/repository/io/micrometer/micrometer-commons/1.14.5/micrometer-commons-1.14.5.jar:/Users/tsuda/.m2/repository/org/flywaydb/flyway-core/10.20.1/flyway-core-10.20.1.jar:/Users/tsuda/.m2/repository/com/fasterxml/jackson/dataformat/jackson-dataformat-toml/2.15.2/jackson-dataformat-toml-2.15.2.jar:/Users/tsuda/.m2/repository/com/fasterxml/jackson/core/jackson-databind/2.15.2/jackson-databind-2.15.2.jar:/Users/tsuda/.m2/repository/com/fasterxml/jackson/core/jackson-core/2.15.2/jackson-core-2.15.2.jar:/Users/tsuda/.m2/repository/com/fasterxml/jackson/datatype/jackson-datatype-jsr310/2.15.2/jackson-datatype-jsr310-2.15.2.jar:/Users/tsuda/.m2/repository/com/fasterxml/jackson/core/jackson-annotations/2.15.2/jackson-annotations-2.15.2.jar'
+-encoding
+'UTF-8'
+-protected
+-source
+'21'
+-sourcepath
+'/Users/tsuda/project/helloPackage/src/main/java:/Users/tsuda/project/helloPackage/target/generated-sources/annotations'
+-author
+-bottom
+'Copyright &#169; 2025. All rights reserved.'
+-charset
+'UTF-8'
+-d
+'/Users/tsuda/project/helloPackage/target/reports/apidocs'
+-docencoding
+'UTF-8'
+-doctitle
+'helloPackages 0.1.0 API'
+-use
+-version
+-windowtitle
+'helloPackages 0.1.0 API'
+jp.co.suda
+/Users/tsuda/.m2/repository/org/slf4j/slf4j-api/1.7.36/slf4j-api-1.7.36.jar = 1644327230000
+/Users/tsuda/.m2/repository/ch/qos/logback/logback-classic/1.5.18/logback-classic-1.5.18.jar = 1742302078000
+/Users/tsuda/.m2/repository/ch/qos/logback/logback-core/1.5.18/logback-core-1.5.18.jar = 1742302033000
+/Users/tsuda/.m2/repository/org/springframework/boot/spring-boot/3.4.4/spring-boot-3.4.4.jar = 1742527276000
+/Users/tsuda/.m2/repository/org/springframework/spring-core/6.2.5/spring-core-6.2.5.jar = 1742406154000
+/Users/tsuda/.m2/repository/org/springframework/spring-jcl/6.2.5/spring-jcl-6.2.5.jar = 1742406126000
+/Users/tsuda/.m2/repository/org/springframework/spring-context/6.2.5/spring-context-6.2.5.jar = 1742406203000
+/Users/tsuda/.m2/repository/org/springframework/spring-aop/6.2.5/spring-aop-6.2.5.jar = 1742406226000
+/Users/tsuda/.m2/repository/org/springframework/spring-beans/6.2.5/spring-beans-6.2.5.jar = 1742406210000
+/Users/tsuda/.m2/repository/org/springframework/spring-expression/6.2.5/spring-expression-6.2.5.jar = 1742406140000
+/Users/tsuda/.m2/repository/io/micrometer/micrometer-observation/1.14.5/micrometer-observation-1.14.5.jar = 1741605089000
+/Users/tsuda/.m2/repository/io/micrometer/micrometer-commons/1.14.5/micrometer-commons-1.14.5.jar = 1741605087000
+/Users/tsuda/.m2/repository/org/flywaydb/flyway-core/10.20.1/flyway-core-10.20.1.jar = 1729765822000
+/Users/tsuda/.m2/repository/com/fasterxml/jackson/dataformat/jackson-dataformat-toml/2.15.2/jackson-dataformat-toml-2.15.2.jar = 1685490974000
+/Users/tsuda/.m2/repository/com/fasterxml/jackson/core/jackson-databind/2.15.2/jackson-databind-2.15.2.jar = 1685489257000
+/Users/tsuda/.m2/repository/com/fasterxml/jackson/core/jackson-core/2.15.2/jackson-core-2.15.2.jar = 1685485055000
+/Users/tsuda/.m2/repository/com/fasterxml/jackson/datatype/jackson-datatype-jsr310/2.15.2/jackson-datatype-jsr310-2.15.2.jar = 1685490334000
+/Users/tsuda/.m2/repository/com/fasterxml/jackson/core/jackson-annotations/2.15.2/jackson-annotations-2.15.2.jar = 1685478841000
+/Users/tsuda/project/helloPackage/src/main/java = 1745561803464
+/Users/tsuda/project/helloPackage/target/generated-sources/annotations = 1745564146408
+/Users/tsuda/project/helloPackage/target/reports/apidocs/tag-search-index.js = 1745564149453
+/Users/tsuda/project/helloPackage/target/reports/apidocs/overview-tree.html = 1745564149424
+/Users/tsuda/project/helloPackage/target/reports/apidocs/module-search-index.js = 1745564149428
+/Users/tsuda/project/helloPackage/target/reports/apidocs/index.html = 1745564149459
+/Users/tsuda/project/helloPackage/target/reports/apidocs/package-search-index.js = 1745564149429
+/Users/tsuda/project/helloPackage/target/reports/apidocs/link.svg = 1745564149464
+/Users/tsuda/project/helloPackage/target/reports/apidocs/index-all.html = 1745564149458
+/Users/tsuda/project/helloPackage/target/reports/apidocs/allpackages-index.html = 1745564149428
+/Users/tsuda/project/helloPackage/target/reports/apidocs/member-search-index.js = 1745564149442
+/Users/tsuda/project/helloPackage/target/reports/apidocs/copy.svg = 1745564149464
+/Users/tsuda/project/helloPackage/target/reports/apidocs/script.js = 1745564149463
+/Users/tsuda/project/helloPackage/target/reports/apidocs/stylesheet.css = 1745564149463
+/Users/tsuda/project/helloPackage/target/reports/apidocs/search-page.js = 1745564149466
+/Users/tsuda/project/helloPackage/target/reports/apidocs/help-doc.html = 1745564149461
+/Users/tsuda/project/helloPackage/target/reports/apidocs/element-list = 1745564149413
+/Users/tsuda/project/helloPackage/target/reports/apidocs/search.html = 1745564149459
+/Users/tsuda/project/helloPackage/target/reports/apidocs/allclasses-index.html = 1745564149427
+/Users/tsuda/project/helloPackage/target/reports/apidocs/type-search-index.js = 1745564149435
+/Users/tsuda/project/helloPackage/target/reports/apidocs/search.js = 1745564149465
