@@ -1,4 +1,4 @@
-package jp.co.suda.common;
+package com.github.teruyukisuda;
 
 import javax.sql.DataSource;
 import org.flywaydb.core.Flyway;

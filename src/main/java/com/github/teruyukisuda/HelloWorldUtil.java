@@ -1,4 +1,4 @@
-package jp.co.suda.common;
+package com.github.teruyukisuda;
 
 import lombok.extern.slf4j.Slf4j;
 
