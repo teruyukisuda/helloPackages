@@ -16,17 +16,12 @@ jobs:
           java-version: '21'
           distribution: 'corretto'
           cache: maven
+          cache-dependency-path: '**/pom.xml'
 
-      - name: Cache Maven packages
-        uses: actions/cache@v3
-        id: maven-cache  # IDを追加してキャッシュヒットを確認できるようにする
-        with:
-          path: ~/.m2
-          key: ${{ runner.os }}-m2-${{ hashFiles('**/pom.xml') }}
-          restore-keys: ${{ runner.os }}-m2
+      - name: Print cache info
+        run: |
+          echo "M2_HOME: $M2_HOME"
+          echo "Maven repository location:"
+          mvn help:evaluate -Dexpression=settings.localRepository -q -DforceStdout
 
-      - name: Print cache status
-        run: echo "Cache hit - ${{ steps.maven-cache.outputs.cache-hit }}"
-
-      - run: mvn test  
-
+      - run: mvn test
