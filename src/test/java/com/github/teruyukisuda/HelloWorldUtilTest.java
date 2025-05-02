@@ -16,4 +16,10 @@ public class HelloWorldUtilTest {
     final String s = HelloWorldUtil.returnBye();
     assertEquals("Bye", s);
   }
+
+  @Test
+  public void testYeah() {
+    final String s = HelloWorldUtil.returnYeah();
+    assertEquals("Yeah", s);
+  }
 }

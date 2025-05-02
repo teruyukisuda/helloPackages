@@ -12,4 +12,8 @@ public class HelloWorldUtil {
   public static String returnBye() {
     return "Bye";
   }
+
+  public static String returnYeah() {
+    return "Yeah";
+  }
 }
