@@ -24,4 +24,8 @@ public class HelloWorldUtil {
   public static String returnWow() {
     return "Wow";
   }
+
+  public static String returnFuga() {
+    return "Fuga";
+  }
 }
