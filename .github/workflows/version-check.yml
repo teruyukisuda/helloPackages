@@ -1,3 +1,5 @@
+# main, developへのprが作られpom.xmlが修正されてい場合に実行
+# バージョン番号が同じ場合はエラーとする(厳密に運用する場合のみ必要か）
 name: Version Consistency Check
 
 on:
