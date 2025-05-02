@@ -24,4 +24,8 @@ public class HelloWorldUtil {
   public static String returnNeko() {
     return "Neko";
   }
+
+  public static String returnInu() {
+    return "Inu";
+  }
 }
