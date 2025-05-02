@@ -22,4 +22,10 @@ public class HelloWorldUtilTest {
     final String s = HelloWorldUtil.returnYeah();
     assertEquals("Yeah", s);
   }
+
+  @Test
+  public void testHowOld() {
+    final String s = HelloWorldUtil.returnHowOld();
+    assertEquals("how old are you", s);
+  }
 }
