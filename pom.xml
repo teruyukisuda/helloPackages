@@ -6,7 +6,7 @@
 
     <groupId>com.github.teruyukisuda</groupId>
     <artifactId>hello-packages</artifactId>
-    <version>0.1.4</version>
+    <version>0.1.7</version>
     <packaging>jar</packaging>
 
     <name>helloPackages</name>
@@ -42,6 +42,13 @@
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-jdbc</artifactId>
             <version>3.4.0</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-test</artifactId>
+            <version>3.4.0</version>
+            <scope>test</scope>
         </dependency>
 
         <dependency>

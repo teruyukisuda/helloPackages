@@ -1,0 +1,30 @@
+# main, developへのprが作られpom.xmlが修正されてい場合に実行
+# バージョン番号が同じ場合はエラーとする(厳密に運用する場合のみ必要か）
+name: Version Consistency Check
+
+on:
+  pull_request:
+    branches: [ main, develop ]
+    paths:
+      - 'pom.xml'
+
+jobs:
+  check-version:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: バージョン変更の確認
+        run: |
+          CURRENT_VERSION=$(grep -m 1 "<version>" pom.xml | sed 's/[<>]/|/g' | cut -d '|' -f 3)
+          git checkout origin/${{ github.base_ref }}
+          PREVIOUS_VERSION=$(grep -m 1 "<version>" pom.xml | sed 's/[<>]/|/g' | cut -d '|' -f 3)
+          
+          if [ "$CURRENT_VERSION" = "$PREVIOUS_VERSION" ]; then
+            echo "警告: pom.xml が変更されていますが、バージョンが変更されていません"
+            exit 1
+          fi
+          
+          echo "バージョン変更を確認: $PREVIOUS_VERSION -> $CURRENT_VERSION"
