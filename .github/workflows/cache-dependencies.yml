@@ -1,5 +1,6 @@
 # mvnのキャッシュを作るためにdefaultブランチに対して実施するworkflow
 name: Cache Maven Dependencies
+run-name: Cache Maven Dependencies
 on:
   workflow_dispatch:  # 手動トリガー用
   push:

@@ -1,4 +1,5 @@
 name: GitHub Packagesへのリリース
+run-name: GitHub Packagesへのリリース
 
 on:
   workflow_dispatch:
@@ -121,7 +122,12 @@ jobs:
           
           # 次の開発バージョンに更新（オプション）
           # 例：1.2.3 -> 1.2.4-SNAPSHOT
-          NEW_DEV_VERSION=$(echo ${{ github.event.inputs.version }} | awk -F. '{$NF = $NF + 1; print}' OFS=.)."-SNAPSHOT"
+          VERSION=${{ github.event.inputs.version }}
+          MAJOR=$(echo $VERSION | cut -d. -f1)
+          MINOR=$(echo $VERSION | cut -d. -f2)
+          PATCH=$(echo $VERSION | cut -d. -f3)
+          NEW_PATCH=$((PATCH + 1))
+          NEW_DEV_VERSION="$MAJOR.$MINOR.$NEW_PATCH-SNAPSHOT"
           mvn versions:set -DnewVersion=$NEW_DEV_VERSION -DgenerateBackupPoms=false
           git add pom.xml
           git commit -m "次の開発バージョン $NEW_DEV_VERSION の準備"

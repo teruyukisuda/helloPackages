@@ -1,4 +1,6 @@
-name: Test
+# javaソースが変更されたPRに対してテストを実行する
+name: Javaソース変更検証
+run-name: PR #${{ github.event.pull_request.number }} のJavaソース変更をテスト
 on:
   pull_request:
     paths: [ 'src/main/java/com/github/teruyukisuda/**/*.java' ]
