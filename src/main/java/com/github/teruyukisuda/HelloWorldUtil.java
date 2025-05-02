@@ -28,4 +28,8 @@ public class HelloWorldUtil {
   public static String returnInu() {
     return "Inu";
   }
+
+  public static String returnUma() {
+    return "Uma";
+  }
 }
