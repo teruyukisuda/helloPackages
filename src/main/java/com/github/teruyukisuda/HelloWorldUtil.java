@@ -20,4 +20,8 @@ public class HelloWorldUtil {
   public static String returnWow() {
     return "Wow";
   }
+
+  public static String returnNeko() {
+    return "Neko";
+  }
 }
