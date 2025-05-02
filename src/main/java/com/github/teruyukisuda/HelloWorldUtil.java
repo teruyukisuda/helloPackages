@@ -27,5 +27,8 @@ public class HelloWorldUtil {
 
   public static String returnHoge() {
     return "Hoge";
+
+  public static String returnFuga() {
+    return "Fuga";
   }
 }
