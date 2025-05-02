@@ -17,16 +17,5 @@ jobs:
           distribution: 'corretto'
           cache: maven
 
-      - name: Cache Maven packages
-        uses: actions/cache@v3
-        id: maven-cache  # IDを追加してキャッシュヒットを確認できるようにする
-        with:
-          path: ~/.m2
-          key: ${{ runner.os }}-m2-${{ hashFiles('**/pom.xml') }}
-          restore-keys: ${{ runner.os }}-m2
-
-      - name: Print cache status
-        run: echo "Cache hit - ${{ steps.maven-cache.outputs.cache-hit }}"
-
       - run: mvn test  
 
