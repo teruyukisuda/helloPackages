@@ -16,4 +16,8 @@ public class HelloWorldUtil {
   public static String returnYeah() {
     return "Yeah";
   }
+
+  public static String returnHowOld() {
+    return "how old are you";
+  }
 }
