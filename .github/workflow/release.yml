@@ -1,0 +1,46 @@
+name: Release to GitHub Packages
+
+on:
+  push:
+    tags:
+      - 'v*'  # vで始まるタグ（例: v0.1.4）がプッシュされたときに実行
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      packages: write
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: バージョンの整合性確認
+        run: |
+          TAG_VERSION=${GITHUB_REF#refs/tags/v}
+          POM_VERSION=$(grep -m 1 "<version>" pom.xml | sed 's/[<>]/|/g' | cut -d '|' -f 3)
+          if [ "$TAG_VERSION" != "$POM_VERSION" ]; then
+            echo "エラー: タグバージョン ($TAG_VERSION) と POM バージョン ($POM_VERSION) が一致しません"
+            exit 1
+          fi
+
+      - name: JDKセットアップ
+        uses: actions/setup-java@v4
+        with:
+          java-version: '21'
+          distribution: 'temurin'
+          cache: maven
+          server-id: github
+          server-username: GITHUB_ACTOR
+          server-password: GITHUB_TOKEN
+
+      - name: GitHub Packagesにパブリッシュ
+        run: mvn --batch-mode deploy
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: GitHub Releaseの作成
+        uses: softprops/action-gh-release@v1
+        with:
+          generate_release_notes: true
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
