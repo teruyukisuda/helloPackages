@@ -24,8 +24,8 @@ public class HelloWorldUtilTest {
   }
 
   @Test
-  public void testHowOld() {
-    final String s = HelloWorldUtil.returnHowOld();
-    assertEquals("how old are you", s);
+  public void testWow() {
+    final String s = HelloWorldUtil.returnWow();
+    assertEquals("Wow", s);
   }
 }
