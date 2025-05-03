@@ -1,29 +1,30 @@
-name: GitHub Packagesへのリリース
-run-name: GitHub Packagesへのリリース
+name: Release helloPackage to GitHub Packages
+run-name: Release helloPackage to GitHub Packages
 
 on:
+  # 手動実行のみ
   workflow_dispatch:
     inputs:
       version:
-        description: 'リリースバージョン (vプレフィックスなし、例: 1.2.3)'
+        description: 'Version to release (e.g., v1.0.0)'
         required: true
-        type: string
+        default: 'v0.0.1'
 
 jobs:
-  prepare-release:
+  build:
     runs-on: ubuntu-latest
     permissions:
       contents: write
       packages: write
+
     steps:
-      - name: mainブランチをチェックアウト
+      - name: Checkout main branch
         uses: actions/checkout@v4
         with:
           ref: main
           fetch-depth: 0
-          token: ${{ secrets.GITHUB_TOKEN }}
 
-      - name: JDKセットアップ
+      - name: Set up JDK 21
         uses: actions/setup-java@v4
         with:
           java-version: '21'
@@ -33,102 +34,45 @@ jobs:
           server-username: GITHUB_ACTOR
           server-password: GITHUB_TOKEN
 
-      - name: POMバージョン更新
+      - name: Configure Git
         run: |
-          mvn versions:set -DnewVersion=${{ github.event.inputs.version }} -DgenerateBackupPoms=false
-          echo "POMバージョンを ${{ github.event.inputs.version }} に更新しました"
+          git config --global user.name "GitHub Actions"
+          git config --global user.email "actions@github.com"
 
-      - name: ビルドとテスト
-        run: mvn --batch-mode clean verify
+      - name: Set version from input
+        run: echo "VERSION=${{ github.event.inputs.version }}" >> $GITHUB_ENV
 
-      - name: 変更をコミット
+      - name: Update version in pom.xml (remove SNAPSHOT)
+        run: mvn versions:set -DremoveSnapshot=true -DgenerateBackupPoms=false
+
+      - name: Commit version changes
         run: |
-          git config --local user.email "action@github.com"
-          git config --local user.name "GitHub Action"
           git add pom.xml
-          git commit -m "バージョン ${{ github.event.inputs.version }} のリリース準備"
-          git push
+          git commit -m "Release version ${VERSION#v}"
+          git push origin main
 
-      - name: タグを作成
+      - name: Create and push tag
         run: |
-          git tag -a "v${{ github.event.inputs.version }}" -m "リリース v${{ github.event.inputs.version }}"
-          git push origin "v${{ github.event.inputs.version }}"
+          git tag -a ${{ env.VERSION }} -m "Release ${{ env.VERSION }}"
+          git push origin ${{ env.VERSION }}
 
-  publish:
-    needs: prepare-release
-    runs-on: ubuntu-latest
-    permissions:
-      contents: write
-      packages: write
-    steps:
-      - name: リリースタグをチェックアウト
-        uses: actions/checkout@v4
+      - name: Build with Maven
+        run: mvn -B package
+
+      - name: Create Release
+        id: create_release
+        uses: softprops/action-gh-release@v1
         with:
-          ref: "v${{ github.event.inputs.version }}"
-          fetch-depth: 0
-          token: ${{ secrets.GITHUB_TOKEN }}
+          tag_name: ${{ env.VERSION }}
+          name: Release ${{ env.VERSION }}
+          draft: false
+          prerelease: false
+          files: |
+            target/*.jar
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
-      - name: バージョンの整合性確認
-        run: |
-          TAG_VERSION="${{ github.event.inputs.version }}"
-          POM_VERSION=$(grep -m 1 "<version>" pom.xml | sed 's/[<>]/|/g' | cut -d '|' -f 3)
-          if [ "$TAG_VERSION" != "$POM_VERSION" ]; then
-            echo "エラー: タグバージョン ($TAG_VERSION) と POM バージョン ($POM_VERSION) が一致しません"
-            exit 1
-          fi
-
-      - name: JDKセットアップ
-        uses: actions/setup-java@v4
-        with:
-          java-version: '21'
-          distribution: 'corretto'
-          cache: maven
-          server-id: github
-          server-username: GITHUB_ACTOR
-          server-password: GITHUB_TOKEN
-
-      - name: GitHub Packagesにパブリッシュ
+      - name: Publish to GitHub Packages
         run: mvn --batch-mode deploy
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-
-      - name: GitHubリリースの作成
-        uses: softprops/action-gh-release@v1
-        with:
-          tag_name: "v${{ github.event.inputs.version }}"
-          generate_release_notes: true
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-  
-  post-release:
-    needs: publish
-    runs-on: ubuntu-latest
-    permissions:
-      contents: write
-    steps:
-      - name: mainブランチをチェックアウト
-        uses: actions/checkout@v4
-        with:
-          ref: main
-          fetch-depth: 0
-          token: ${{ secrets.GITHUB_TOKEN }}
-
-      - name: developブランチへのマージバック
-        run: |
-          git config --local user.email "action@github.com"
-          git config --local user.name "GitHub Action"
-          git checkout develop
-          git merge --no-ff main -m "main (${{ github.event.inputs.version }}) をdevelopにマージバック"
-          
-          # 次の開発バージョンに更新（オプション）
-          # 例：1.2.3 -> 1.2.4-SNAPSHOT
-          VERSION=${{ github.event.inputs.version }}
-          MAJOR=$(echo $VERSION | cut -d. -f1)
-          MINOR=$(echo $VERSION | cut -d. -f2)
-          PATCH=$(echo $VERSION | cut -d. -f3)
-          NEW_PATCH=$((PATCH + 1))
-          NEW_DEV_VERSION="$MAJOR.$MINOR.$NEW_PATCH-SNAPSHOT"
-          mvn versions:set -DnewVersion=$NEW_DEV_VERSION -DgenerateBackupPoms=false
-          git add pom.xml
-          git commit -m "次の開発バージョン $NEW_DEV_VERSION の準備"
-          git push origin develop
