@@ -6,7 +6,7 @@
 
     <groupId>com.github.teruyukisuda</groupId>
     <artifactId>hello-packages</artifactId>
-    <version>0.1.14</version>
+    <version>0.1.15</version>
     <packaging>jar</packaging>
     <name>helloPackages</name>
     <description>Utility library with HelloWorld Test and Flyway configurations</description>
@@ -68,10 +68,15 @@
 
     <distributionManagement>
         <repository>
-            <id>github</id>
+            <id>github-teruyukisuda</id>
             <name>GitHub Packages</name>
             <url>https://maven.pkg.github.com/teruyukisuda/helloPackages</url>
         </repository>
+        <snapshotRepository>
+            <id>github-teruyukisuda</id>
+            <name>GitHub Packages</name>
+            <url>https://maven.pkg.github.com/teruyukisuda/helloPackages</url>
+        </snapshotRepository>
     </distributionManagement>
 
     <build>
