@@ -69,10 +69,15 @@
 
     <distributionManagement>
         <repository>
-            <id>github</id>
+            <id>github-teruyukisuda</id>
             <name>GitHub Packages</name>
             <url>https://maven.pkg.github.com/teruyukisuda/helloPackages</url>
         </repository>
+        <snapshotRepository>
+            <id>github-teruyukisuda</id>
+            <name>GitHub Packages</name>
+            <url>https://maven.pkg.github.com/teruyukisuda/helloPackages</url>
+        </snapshotRepository>
     </distributionManagement>
 
     <build>
