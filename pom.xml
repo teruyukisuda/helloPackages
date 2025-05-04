@@ -6,7 +6,7 @@
 
     <groupId>com.github.teruyukisuda</groupId>
     <artifactId>hello-packages</artifactId>
-    <version>0.1.22-SNAPSHOT</version>
+    <version>0.1.22</version>
     <packaging>jar</packaging>
     <name>helloPackages</name>
     <description>Utility library with HelloWorld Test and Flyway configurations</description>
