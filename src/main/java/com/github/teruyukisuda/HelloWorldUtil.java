@@ -18,6 +18,6 @@ public class HelloWorldUtil {
   }
 
   public static String returnHoge() {
-    return "HOGE";
+    return "hoge";
   }
 }
