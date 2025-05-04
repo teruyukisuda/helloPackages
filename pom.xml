@@ -8,7 +8,6 @@
     <artifactId>hello-packages</artifactId>
     <version>0.1.15</version>
     <packaging>jar</packaging>
-
     <name>helloPackages</name>
     <description>Utility library with HelloWorld Test and Flyway configurations</description>
 
