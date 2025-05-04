@@ -17,4 +17,7 @@ public class HelloWorldUtil {
     return "Yeah";
   }
 
+  public static String returnHoge() {
+    return "Hoge";
+  }
 }
