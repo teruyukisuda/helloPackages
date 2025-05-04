@@ -2,8 +2,11 @@ name: Post Release Update
 run-name: Update develop branch after release
 
 on:
-  release:
-    types: [published]
+  workflow_dispatch: 
+  workflow_run:
+    workflows: [ "Create Release" ]
+    types: [ completed ]
+    branches: [ main ]
 
 jobs:
   update-develop:
