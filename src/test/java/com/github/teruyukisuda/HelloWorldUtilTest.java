@@ -26,7 +26,7 @@ public class HelloWorldUtilTest {
   @Test
   public void testHoge() {
     final String s = HelloWorldUtil.returnHoge();
-    assertEquals("Hoge", s);
+    assertEquals("HOGE", s);
   }
 
 }
