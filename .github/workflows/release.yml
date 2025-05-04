@@ -27,7 +27,7 @@ jobs:
           java-version: '21'
           distribution: 'corretto'
           cache: maven
-          server-id: github
+          server-id: github-teruyukisuda
           server-username: GITHUB_ACTOR
           server-password: GITHUB_TOKEN
 
