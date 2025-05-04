@@ -1,5 +1,5 @@
 name: Create Release
-run-name: Create Release on main branch
+run-name: Create Release
 
 on:
   pull_request:
