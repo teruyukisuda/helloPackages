@@ -23,9 +23,4 @@ public class HelloWorldUtilTest {
     assertEquals("Yeah", s);
   }
 
-  @Test
-  public void testWow() {
-    final String s = HelloWorldUtil.returnWow();
-    assertEquals("Wow", s);
-  }
 }

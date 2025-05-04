@@ -17,7 +17,4 @@ public class HelloWorldUtil {
     return "Yeah";
   }
 
-  public static String returnWow() {
-    return "Wow";
-  }
 }
