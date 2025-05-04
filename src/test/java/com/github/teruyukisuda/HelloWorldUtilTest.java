@@ -22,5 +22,11 @@ public class HelloWorldUtilTest {
     final String s = HelloWorldUtil.returnYeah();
     assertEquals("Yeah", s);
   }
+  
+  @Test
+  public void testHoge() {
+    final String s = HelloWorldUtil.returnHoge();
+    assertEquals("hoge", s);
+  }
 
 }
