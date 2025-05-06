@@ -6,9 +6,13 @@ on:
     types: [ closed ]
     branches:
       - main
+defaults: 
+  run:
+    shell: bash
 
 jobs:
   release:
+    timeout-minutes: 10
     runs-on: ubuntu-latest
     if: github.event.pull_request.merged && startsWith(github.event.pull_request.head.ref, 'release/')
     permissions:
@@ -38,7 +42,7 @@ jobs:
 
       - name: Get version from pom.xml
         run: |
-          echo "RELEASE_VERSION=$(mvn help:evaluate -Dexpression=project.version -q -DforceStdout)" >> $GITHUB_ENV
+          echo "RELEASE_VERSION=$(mvn help:evaluate -Dexpression=project.version -q -DforceStdout)" >> "${GITHUB_ENV}"
 
       - name: Create and push tag
         run: |
@@ -49,7 +53,7 @@ jobs:
         run: mvn -B package
 
       - name: Create GitHub Release
-        uses: softprops/action-gh-release@v1
+        uses: softprops/action-gh-release@v2
         with:
           tag_name: ${{ env.RELEASE_VERSION }}
           name: Release ${{ env.RELEASE_VERSION }}

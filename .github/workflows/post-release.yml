@@ -5,9 +5,14 @@ on:
   workflow_run:
     workflows: [ "Create Release" ]
     types: [ completed ]
+    
+defaults: 
+  run: 
+    shell: bash
 
 jobs:
   update-develop:
+    timeout-minutes: 5
     runs-on: ubuntu-latest
     if: ${{ github.event.workflow_run.conclusion == 'success' || github.event.name == 'workflow_dispatch' }}
     permissions:
@@ -57,11 +62,11 @@ jobs:
           NEXT_VERSION="${MAJOR}.${MINOR}.${NEXT_PATCH}-SNAPSHOT"
           
           # 次の開発バージョンを設定
-          mvn versions:set -DnewVersion=$NEXT_VERSION -DgenerateBackupPoms=false
+          mvn versions:set -DnewVersion="${NEXT_VERSION}" -DgenerateBackupPoms=false
           
           # 変更をコミット
           git add pom.xml
-          git commit -m "Prepare for next development iteration $NEXT_VERSION"
+          git commit -m "Prepare for next development iteration ${NEXT_VERSION}"
           
       - name: Push changes
         run: |

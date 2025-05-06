@@ -1,0 +1,132 @@
+name: GitHub Context Variables Sample
+run-name: "GitHub Context Variables Demo: ${{ github.actor }}"
+
+# Manual trigger with parameters
+on:
+  workflow_dispatch:
+    inputs:
+      string_parameter:
+        description: 'A sample string parameter'
+        required: true
+        default: 'Hello World'
+        type: string
+      boolean_parameter:
+        description: 'A sample boolean parameter'
+        required: false
+        default: false
+        type: boolean
+      choice_parameter:
+        description: 'A sample choice parameter'
+        required: true
+        default: 'option1'
+        type: choice
+        options:
+          - option1
+          - option2
+          - option3
+      environment_parameter:
+        description: 'Select environment'
+        required: true
+        default: 'development'
+        type: environment
+
+jobs:
+  show-github-context:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Display Workflow Inputs
+        run: |
+          echo "String parameter: ${{ github.event.inputs.string_parameter }}"
+          echo "Boolean parameter: ${{ github.event.inputs.boolean_parameter }}"
+          echo "Choice parameter: ${{ github.event.inputs.choice_parameter }}"
+          echo "Environment parameter: ${{ github.event.inputs.environment_parameter }}"
+
+      - name: Display GitHub Context Variables
+        run: |
+          echo "## GitHub Context Variables" >> $GITHUB_STEP_SUMMARY
+          echo "| Variable | Value |" >> $GITHUB_STEP_SUMMARY
+          echo "| --- | --- |" >> $GITHUB_STEP_SUMMARY
+          echo "| github.action | ${{ github.action }} |" >> $GITHUB_STEP_SUMMARY
+          echo "| github.action_path | ${{ github.action_path }} |" >> $GITHUB_STEP_SUMMARY
+          echo "| github.actor | ${{ github.actor }} |" >> $GITHUB_STEP_SUMMARY
+          echo "| github.base_ref | ${{ github.base_ref }} |" >> $GITHUB_STEP_SUMMARY
+          echo "| github.event_name | ${{ github.event_name }} |" >> $GITHUB_STEP_SUMMARY
+          echo "| github.event.action | ${{ github.event.action }} |" >> $GITHUB_STEP_SUMMARY
+          echo "| github.head_ref | ${{ github.head_ref }} |" >> $GITHUB_STEP_SUMMARY
+          echo "| github.job | ${{ github.job }} |" >> $GITHUB_STEP_SUMMARY
+          echo "| github.ref | ${{ github.ref }} |" >> $GITHUB_STEP_SUMMARY
+          echo "| github.ref_name | ${{ github.ref_name }} |" >> $GITHUB_STEP_SUMMARY
+          echo "| github.ref_protected | ${{ github.ref_protected }} |" >> $GITHUB_STEP_SUMMARY
+          echo "| github.ref_type | ${{ github.ref_type }} |" >> $GITHUB_STEP_SUMMARY
+          echo "| github.repository | ${{ github.repository }} |" >> $GITHUB_STEP_SUMMARY
+          echo "| github.repository_owner | ${{ github.repository_owner }} |" >> $GITHUB_STEP_SUMMARY
+          echo "| github.run_id | ${{ github.run_id }} |" >> $GITHUB_STEP_SUMMARY
+          echo "| github.run_number | ${{ github.run_number }} |" >> $GITHUB_STEP_SUMMARY
+          echo "| github.run_attempt | ${{ github.run_attempt }} |" >> $GITHUB_STEP_SUMMARY
+          echo "| github.server_url | ${{ github.server_url }} |" >> $GITHUB_STEP_SUMMARY
+          echo "| github.sha | ${{ github.sha }} |" >> $GITHUB_STEP_SUMMARY
+          echo "| github.workflow | ${{ github.workflow }} |" >> $GITHUB_STEP_SUMMARY
+          echo "| github.workspace | ${{ github.workspace }} |" >> $GITHUB_STEP_SUMMARY
+
+      - name: Display Runner Context Variables
+        run: |
+          echo "## Runner Context Variables" >> $GITHUB_STEP_SUMMARY
+          echo "| Variable | Value |" >> $GITHUB_STEP_SUMMARY
+          echo "| --- | --- |" >> $GITHUB_STEP_SUMMARY
+          echo "| runner.name | ${{ runner.name }} |" >> $GITHUB_STEP_SUMMARY
+          echo "| runner.os | ${{ runner.os }} |" >> $GITHUB_STEP_SUMMARY
+          echo "| runner.arch | ${{ runner.arch }} |" >> $GITHUB_STEP_SUMMARY
+          echo "| runner.temp | ${{ runner.temp }} |" >> $GITHUB_STEP_SUMMARY
+          echo "| runner.tool_cache | ${{ runner.tool_cache }} |" >> $GITHUB_STEP_SUMMARY
+
+      - name: Display Environment Variables
+        run: |
+          echo "## Environment Variables" >> $GITHUB_STEP_SUMMARY
+          echo "| Variable | Value |" >> $GITHUB_STEP_SUMMARY
+          echo "| --- | --- |" >> $GITHUB_STEP_SUMMARY
+          echo "| env.GITHUB_WORKFLOW | ${{ env.GITHUB_WORKFLOW }} |" >> $GITHUB_STEP_SUMMARY
+          echo "| env.GITHUB_RUN_ID | ${{ env.GITHUB_RUN_ID }} |" >> $GITHUB_STEP_SUMMARY
+          echo "| env.GITHUB_RUN_NUMBER | ${{ env.GITHUB_RUN_NUMBER }} |" >> $GITHUB_STEP_SUMMARY
+          echo "| env.GITHUB_ACTION | ${{ env.GITHUB_ACTION }} |" >> $GITHUB_STEP_SUMMARY
+          echo "| env.GITHUB_ACTIONS | ${{ env.GITHUB_ACTIONS }} |" >> $GITHUB_STEP_SUMMARY
+          echo "| env.GITHUB_ACTOR | ${{ env.GITHUB_ACTOR }} |" >> $GITHUB_STEP_SUMMARY
+          echo "| env.GITHUB_REPOSITORY | ${{ env.GITHUB_REPOSITORY }} |" >> $GITHUB_STEP_SUMMARY
+          echo "| env.GITHUB_EVENT_NAME | ${{ env.GITHUB_EVENT_NAME }} |" >> $GITHUB_STEP_SUMMARY
+          echo "| env.GITHUB_EVENT_PATH | ${{ env.GITHUB_EVENT_PATH }} |" >> $GITHUB_STEP_SUMMARY
+          echo "| env.GITHUB_WORKSPACE | ${{ env.GITHUB_WORKSPACE }} |" >> $GITHUB_STEP_SUMMARY
+          echo "| env.GITHUB_SHA | ${{ env.GITHUB_SHA }} |" >> $GITHUB_STEP_SUMMARY
+          echo "| env.GITHUB_REF | ${{ env.GITHUB_REF }} |" >> $GITHUB_STEP_SUMMARY
+          echo "| env.GITHUB_HEAD_REF | ${{ env.GITHUB_HEAD_REF }} |" >> $GITHUB_STEP_SUMMARY
+          echo "| env.GITHUB_BASE_REF | ${{ env.GITHUB_BASE_REF }} |" >> $GITHUB_STEP_SUMMARY
+
+      - name: Display Job and Steps Context
+        run: |
+          echo "## Job and Steps Context" >> $GITHUB_STEP_SUMMARY
+          echo "| Variable | Value |" >> $GITHUB_STEP_SUMMARY
+          echo "| --- | --- |" >> $GITHUB_STEP_SUMMARY
+          echo "| job.status | ${{ job.status }} |" >> $GITHUB_STEP_SUMMARY
+          echo "| steps.checkout.outcome | ${{ steps.checkout.outcome }} |" >> $GITHUB_STEP_SUMMARY
+          echo "| steps.checkout.conclusion | ${{ steps.checkout.conclusion }} |" >> $GITHUB_STEP_SUMMARY
+
+      - name: Console Output of Variables
+        run: |
+          echo "=== GitHub Context Variables ==="
+          echo "github.action: ${{ github.action }}"
+          echo "github.actor: ${{ github.actor }}"
+          echo "github.repository: ${{ github.repository }}"
+          echo "github.event_name: ${{ github.event_name }}"
+          echo "github.ref: ${{ github.ref }}"
+          echo "github.workflow: ${{ github.workflow }}"
+          
+          echo "=== Runner Context Variables ==="
+          echo "runner.os: ${{ runner.os }}"
+          echo "runner.arch: ${{ runner.arch }}"
+          
+          echo "=== Input Parameters ==="
+          echo "String parameter: ${{ github.event.inputs.string_parameter }}"
+          echo "Boolean parameter: ${{ github.event.inputs.boolean_parameter }}"
+          echo "Choice parameter: ${{ github.event.inputs.choice_parameter }}"
+          echo "Environment parameter: ${{ github.event.inputs.environment_parameter }}"

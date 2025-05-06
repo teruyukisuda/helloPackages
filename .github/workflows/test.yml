@@ -4,9 +4,13 @@ run-name: PR "#${{ github.event.pull_request.number }} のJavaソース変更を
 on:
   pull_request:
     paths: [ 'src/main/java/com/github/teruyukisuda/**/*.java' ]
+defaults: 
+  run:
+    shell: bash # 明示的に指定することによってpipefailが拾えるらしい
 
 jobs:
   test:
+    timeout-minutes: 5 
     runs-on: ubuntu-latest
     steps:
       - name: checkout repo
