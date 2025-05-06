@@ -24,11 +24,25 @@ on:
           - option1
           - option2
           - option3
+      # The 'environment' type allows selecting from environments configured in repository settings
+      # Note: This requires environments to be configured in your repository settings
+      # If this doesn't display correctly, you might need to configure environments first
       environment_parameter:
-        description: 'Select environment'
+        description: 'Select environment (requires configured environments)'
         required: true
         default: 'development'
         type: environment
+
+      # Alternative environment selection using choice type
+      env_choice_parameter:
+        description: 'Alternative environment selection'
+        required: false
+        default: 'development'
+        type: choice
+        options:
+          - development
+          - staging
+          - production
 
 jobs:
   show-github-context:
@@ -43,6 +57,7 @@ jobs:
           echo "Boolean parameter: ${{ github.event.inputs.boolean_parameter }}"
           echo "Choice parameter: ${{ github.event.inputs.choice_parameter }}"
           echo "Environment parameter: ${{ github.event.inputs.environment_parameter }}"
+          echo "Alternative environment parameter: ${{ github.event.inputs.env_choice_parameter }}"
 
       - name: Display GitHub Context Variables
         run: |
@@ -120,13 +135,14 @@ jobs:
           echo "github.event_name: ${{ github.event_name }}"
           echo "github.ref: ${{ github.ref }}"
           echo "github.workflow: ${{ github.workflow }}"
-          
+
           echo "=== Runner Context Variables ==="
           echo "runner.os: ${{ runner.os }}"
           echo "runner.arch: ${{ runner.arch }}"
-          
+
           echo "=== Input Parameters ==="
           echo "String parameter: ${{ github.event.inputs.string_parameter }}"
           echo "Boolean parameter: ${{ github.event.inputs.boolean_parameter }}"
           echo "Choice parameter: ${{ github.event.inputs.choice_parameter }}"
           echo "Environment parameter: ${{ github.event.inputs.environment_parameter }}"
+          echo "Alternative environment parameter: ${{ github.event.inputs.env_choice_parameter }}"
