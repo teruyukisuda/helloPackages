@@ -20,8 +20,4 @@ public class HelloWorldUtil {
     return "Yeah";
   }
 
-  public static String returnHoge() {
-    log.debug("Returning hoge message");
-    return "hoge";
-  }
 }
