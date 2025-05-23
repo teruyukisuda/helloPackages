@@ -22,23 +22,23 @@ public class HelloWorldUtilTest {
 
   @BeforeEach
   public void setup() {
-    // Get the logger for HelloWorldUtil class
+    // HelloWorldUtilクラスのロガーを取得
     helloWorldLogger = (Logger) LoggerFactory.getLogger(HelloWorldUtil.class);
 
-    // Set the logger level to DEBUG
+    // ロガーレベルをDEBUGに設定
     helloWorldLogger.setLevel(ch.qos.logback.classic.Level.DEBUG);
 
-    // Create and start a ListAppender
+    // ListAppenderを作成して開始
     listAppender = new ListAppender<>();
     listAppender.start();
 
-    // Add the appender to the logger
+    // ロガーにアペンダーを追加
     helloWorldLogger.addAppender(listAppender);
   }
 
   @AfterEach
   public void teardown() {
-    // Remove the appender after the test
+    // テスト後にアペンダーを削除
     helloWorldLogger.detachAppender(listAppender);
   }
 
@@ -59,16 +59,16 @@ public class HelloWorldUtilTest {
     final String s = HelloWorldUtil.returnHello();
     assertEquals("Hello", s);
 
-    // Verify that the log message was recorded
+    // ログメッセージが記録されたことを確認
     boolean found = false;
     for (ILoggingEvent event : listAppender.list) {
-      if (event.getMessage().equals("Returning hello message") && 
+      if (event.getMessage().equals("helloメッセージを返します") && 
           event.getLevel().toString().equals("DEBUG")) {
         found = true;
         break;
       }
     }
-    assertTrue(found, "Expected debug log message not found");
+    assertTrue(found, "期待されるデバッグログメッセージが見つかりませんでした");
   }
 
   @Test
