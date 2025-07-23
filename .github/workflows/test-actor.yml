@@ -10,6 +10,9 @@ jobs:
   test:
     runs-on: ubuntu-latest
     steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        
       - name: Show actor info
         run: |
           echo "Actor: ${{ github.actor }}"
@@ -20,5 +23,6 @@ jobs:
         run: |
           git config --global user.name "GitHub Actions"  
           git config --global user.email "actions@github.com"
-          git tag test-$(date +%s)
-          git push origin test-$(date +%s)
+          TAG_NAME="test-$(date +%s)"
+          git tag $TAG_NAME
+          git push origin $TAG_NAME
