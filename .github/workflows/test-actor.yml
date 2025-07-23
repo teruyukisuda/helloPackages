@@ -6,6 +6,9 @@ on:
       - test-*
   workflow_dispatch:
 
+permissions:
+  contents: write
+
 jobs:
   test:
     runs-on: ubuntu-latest
@@ -25,4 +28,4 @@ jobs:
           git config --global user.email "actions@github.com"
           TAG_NAME="test-$(date +%s)"
           git tag $TAG_NAME
-          git push origin $TAG_NAME
+          echo "Created tag: $TAG_NAME (not pushed)"
